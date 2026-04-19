@@ -1,0 +1,81 @@
+version: '3.9'
+
+services:
+  # ── PostgreSQL 16 with pgvector ──
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: roleradar-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: roleradar
+      POSTGRES_USER: roleradar
+      POSTGRES_PASSWORD: roleradar_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U roleradar"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis 7 ──
+  redis:
+    image: redis:7-alpine
+    container_name: roleradar-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── MinIO (S3-compatible object storage) ──
+  minio:
+    image: minio/minio:latest
+    container_name: roleradar-minio
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── RabbitMQ ──
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: roleradar-rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: roleradar
+      RABBITMQ_DEFAULT_PASS: roleradar_dev
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_running"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
+  rabbitmq_data:

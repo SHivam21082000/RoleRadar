@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+}
+
+@layer components {
+  /* ── Glass Card ── */
+  .glass-card {
+    @apply bg-surface-900/60 backdrop-blur-xl border border-surface-700/50 rounded-2xl;
+  }
+
+  /* ── Gradient Text ── */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-400 via-primary-300 to-accent-cyan bg-clip-text text-transparent;
+  }
+
+  /* ── Button Base ── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 
+           bg-primary-600 hover:bg-primary-500 active:bg-primary-700
+           text-white font-medium rounded-xl
+           transition-all duration-200 ease-out
+           shadow-lg shadow-primary-600/25 hover:shadow-primary-500/30
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-surface-950;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5
+           bg-surface-800 hover:bg-surface-700 active:bg-surface-600
+           text-surface-200 font-medium rounded-xl border border-surface-700
+           transition-all duration-200 ease-out
+           focus:outline-none focus:ring-2 focus:ring-surface-500 focus:ring-offset-2 focus:ring-offset-surface-950;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2
+           text-surface-400 hover:text-white hover:bg-surface-800
+           font-medium rounded-xl
+           transition-all duration-200 ease-out;
+  }
+
+  /* ── Input Base ── */
+  .input-field {
+    @apply w-full px-4 py-3 
+           bg-surface-800/80 border border-surface-700 rounded-xl
+           text-white placeholder-surface-500
+           transition-all duration-200 ease-out
+           focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
+  }
+
+  /* ── Badge ── */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-primary {
+    @apply badge bg-primary-500/20 text-primary-300 border border-primary-500/30;
+  }
+  .badge-success {
+    @apply badge bg-emerald-500/20 text-emerald-300 border border-emerald-500/30;
+  }
+  .badge-warning {
+    @apply badge bg-amber-500/20 text-amber-300 border border-amber-500/30;
+  }
+  .badge-danger {
+    @apply badge bg-rose-500/20 text-rose-300 border border-rose-500/30;
+  }
+
+  /* ── Score Badge ── */
+  .score-high {
+    @apply text-emerald-400;
+  }
+  .score-medium {
+    @apply text-amber-400;
+  }
+  .score-low {
+    @apply text-rose-400;
+  }
+
+  /* ── Skeleton Loading ── */
+  .skeleton {
+    @apply animate-pulse bg-surface-800 rounded-lg;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
