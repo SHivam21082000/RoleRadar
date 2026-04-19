@@ -20,7 +20,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 || error.response?.status === 403) {
       localStorage.removeItem('accessToken');
       window.location.href = '/login';
     }
@@ -40,8 +40,7 @@ export const authApi = {
 
 // ── Resume API ──
 export const resumeApi = {
-  list:   ()       => api.get('/v1/resumes'),
-  get:    (id)     => api.get(`/v1/resumes/${id}`),
+  getAll: ()       => api.get('/v1/resumes'),
   upload: (file)   => {
     const formData = new FormData();
     formData.append('file', file);

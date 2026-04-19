@@ -50,9 +50,7 @@ export default function Sidebar({ isOpen, onClose }) {
         {/* Logo */}
         <div className="flex h-16 items-center justify-between px-6 border-b border-surface-800">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-600 shadow-glow">
-              <HiOutlineSparkles className="h-5 w-5 text-white" />
-            </div>
+            <img src="/favicon.png" alt="RoleRadar Logo" className="h-9 w-9 object-contain" />
             <span className="text-xl font-bold gradient-text">RoleRadar</span>
           </div>
           <button

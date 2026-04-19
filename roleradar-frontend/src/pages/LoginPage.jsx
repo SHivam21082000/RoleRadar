@@ -47,9 +47,7 @@ export default function LoginPage() {
           </Link>
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600 shadow-glow">
-                <HiOutlineSparkles className="h-5 w-5 text-white" />
-              </div>
+              <img src="/favicon.png" alt="RoleRadar Logo" className="h-10 w-10 object-contain" />
               <span className="text-2xl font-bold gradient-text">RoleRadar</span>
             </div>
             <h1 className="text-xl font-semibold text-white">Welcome back</h1>
