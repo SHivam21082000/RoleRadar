@@ -9,17 +9,19 @@ import {
   HiOutlineCog6Tooth,
   HiOutlineXMark,
   HiOutlineBookmark,
+  HiOutlineChartPie,
+  HiOutlineCog8Tooth,
 } from 'react-icons/hi2';
 
 const navigation = [
-  { name: 'Dashboard',    href: '/',              icon: HiOutlineHome },
-  { name: 'Jobs',         href: '/jobs',          icon: HiOutlineBriefcase },
-  { name: 'Matches',      href: '/matches',       icon: HiOutlineSparkles },
-  { name: 'Resumes',      href: '/resumes',       icon: HiOutlineDocumentText },
-  { name: 'Applications', href: '/applications',  icon: HiOutlineViewColumns },
-  { name: 'Saved Jobs',   href: '/bookmarks',     icon: HiOutlineBookmark },
-  { name: 'Analytics',    href: '/analytics',     icon: HiOutlineChartBarSquare },
-  { name: 'Settings',     href: '/settings',      icon: HiOutlineCog6Tooth },
+  { name: 'Dashboard',    href: '/dashboard',              icon: HiOutlineHome },
+  { name: 'Matches',      href: '/dashboard/matches',       icon: HiOutlineSparkles },
+  { name: 'Jobs',         href: '/dashboard/jobs',          icon: HiOutlineBriefcase },
+  { name: 'Resumes',      href: '/dashboard/resumes',       icon: HiOutlineDocumentText },
+  { name: 'Applications', href: '/dashboard/applications',  icon: HiOutlineChartBarSquare },
+  { name: 'Bookmarked',   href: '/dashboard/bookmarks',     icon: HiOutlineBookmark },
+  { name: 'Analytics',    href: '/dashboard/analytics',     icon: HiOutlineChartPie },
+  { name: 'Settings',     href: '/dashboard/settings',      icon: HiOutlineCog8Tooth },
 ];
 
 export default function Sidebar({ isOpen, onClose }) {

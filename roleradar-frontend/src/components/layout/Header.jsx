@@ -1,6 +1,17 @@
-import { HiOutlineBars3, HiOutlineBell, HiOutlineMagnifyingGlass } from 'react-icons/hi2';
+import { HiOutlineBars3, HiOutlineBell, HiOutlineMagnifyingGlass, HiOutlineArrowRightOnRectangle } from 'react-icons/hi2';
+import useAuthStore from '../../stores/authStore';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header({ onMenuClick }) {
+  const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <header className="flex h-16 items-center justify-between border-b border-surface-800 bg-surface-950/80 backdrop-blur-xl px-6">
       {/* Left — hamburger + search */}
@@ -34,12 +45,19 @@ export default function Header({ onMenuClick }) {
 
         <div className="flex items-center gap-3 pl-3 border-l border-surface-800">
           <div className="text-right hidden sm:block">
-            <p className="text-sm font-medium text-white">Shivam S.</p>
+            <p className="text-sm font-medium text-white">{user?.fullName || 'User'}</p>
             <p className="text-xs text-surface-500">Free Plan</p>
           </div>
           <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-primary-500 to-accent-violet flex items-center justify-center text-sm font-bold text-white shadow-glow">
-            SS
+            {user?.fullName?.charAt(0) || 'U'}
           </div>
+          <button 
+            onClick={handleLogout}
+            className="p-2 ml-1 text-surface-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors"
+            title="Log out"
+          >
+            <HiOutlineArrowRightOnRectangle className="h-5 w-5" />
+          </button>
         </div>
       </div>
     </header>
